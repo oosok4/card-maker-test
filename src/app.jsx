@@ -1,13 +1,14 @@
 //import React from 'react';
 import './app.css';
+import Login from './components/login/login';
 
 function App() {
   var name = undefined;
   return (
-    <>
-      <h1>hello2</h1>
-
-    </>
+    <div>
+      <Login/>
+    </div>
+    
   );
 
 }
