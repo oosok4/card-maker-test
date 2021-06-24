@@ -1,19 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router';
 
-const Login = (props) =>{
-    const Login = () => {
 
-    };
+const Login = ({authService}) =>{
+    const history = useHistory();
+    const goToMaker = (userId) => {
+        history.push({
+            pathname : '/maker',
+            state : {id  : userId}
+        });
+    }
+
+    const onLogin = (event) => {
+        authService.login(event.currentTarget.textContent)
+        .then(data => goToMaker(data.user.uid));
+    }
+
+    useEffect(()=>{
+        authService.onAuthChange(user => {
+            user && goToMaker(user.uid);
+        })
+    })
 
     return (
         <div>
-            <h1>LogIn</h1>
+            <h1>Login</h1>
             <ul>
                 <li>
-                    <button>Google</button>
+                    <button onClick={onLogin}>Google</button>
                 </li>
                 <li>
-                    <button>Github</button>
+                    <button onClick={onLogin}>Github</button>
                 </li>
 
             </ul>
